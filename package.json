@@ -1,0 +1,36 @@
+{
+  "name": "project_ssr",
+  "version": "1.0.0",
+  "description": "ssr on koa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./server/server.dev.js --watch server"
+  },
+  "keywords": [
+    "react",
+    "ssr",
+    "koa"
+  ],
+  "author": "xylitol_lin",
+  "license": "MIT",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "ejs": "^2.5.7",
+    "koa": "^2.4.1",
+    "koa-views": "^6.1.3"
+  },
+  "devDependencies": {
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "koa-webpack-dev-middleware": "^2.0.2",
+    "nodemon": "^1.14.3",
+    "progress-bar-webpack-plugin": "^1.10.0",
+    "webpack": "^3.10.0",
+    "webpack-hot-middleware": "^2.21.0"
+  }
+}
