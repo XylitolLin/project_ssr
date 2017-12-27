@@ -11,8 +11,9 @@ require('babel-register')({
 const app = require('./app.js'),
     path = require('path'),
     webpack = require('webpack'),
+    convert = require('koa-convert'),
     devMiddleware = require('koa-webpack-dev-middleware'),
-    hotMiddleware = require('./middleware/koa-webpack-hot-middleware'),
+    hotMiddleware = require('koa-webpack-hot-middleware'),
     views = require('koa-views'),
     config = require('../config/webpack.dev.config'),
     fs = require('fs'),
@@ -26,7 +27,6 @@ compiler.plugin('emit', (compilation, callback) => {
     let file, data
 
     Object.keys(assets).forEach(key => {
-        console.log(key)
         if (key.match(/\.html$/)) {
             file = path.resolve(__dirname, key)
             data = assets[key].source()
@@ -45,5 +45,5 @@ app.use(devMiddleware(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath
 }))
-app.use(hotMiddleware(compiler))
+app.use(convert(hotMiddleware(compiler)))
 app.listen(port)

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./server/server.dev.js --watch server",
+    "dev": "nodemon ./server/server.dev.js --watch server --watch config",
     "webpack": "webpack --config ./config/webpack.dev.config.js"
   },
   "keywords": [
@@ -23,6 +23,7 @@
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",
     "koa-compress": "^2.0.0",
+    "koa-convert": "^1.2.0",
     "koa-json": "^2.0.2",
     "koa-logger": "^3.1.0",
     "koa-router": "^7.3.0",
@@ -43,6 +44,7 @@
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
     "koa-webpack-dev-middleware": "^2.0.2",
+    "koa-webpack-hot-middleware": "^1.0.3",
     "nodemon": "^1.14.3",
     "progress-bar-webpack-plugin": "^1.10.0",
     "webpack": "^3.10.0",

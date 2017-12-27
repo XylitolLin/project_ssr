@@ -9,7 +9,6 @@ const store = configureStore()
 
 async function clientRoute(ctx, next) {
     let _renderProps, context = {}
-    console.log('ctx.url: ', ctx.url)
     if (ctx.url === '/users' || ctx.url === '/') {
         await ctx.render('index', {
             root: renderToString(
