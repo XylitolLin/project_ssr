@@ -59,7 +59,6 @@ module.exports = {
     },
     resolve: {extensions: [ '.js', '.json' ]},
     plugins: [
-        new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor', 'manifest'],
             filename: '[name].js'
