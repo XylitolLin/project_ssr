@@ -1,4 +1,9 @@
 import React from 'react'
+
+import styles from './Home.css'
+
 export default () => (
-    <div>Home!</div>
+    <div className={styles['page']}>
+        Home!
+    </div>
 )

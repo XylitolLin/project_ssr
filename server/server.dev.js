@@ -8,6 +8,12 @@ require('babel-register')({
     plugins: ['add-module-exports']
 })
 
+require('css-modules-require-hook')({
+    extensions: ['.css'],
+    camelCase: true,
+    generateScopedName: '[name]__[local]__[hash:base64:8]'
+})
+
 const app = require('./app.js'),
     path = require('path'),
     webpack = require('webpack'),

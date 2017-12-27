@@ -37,6 +37,20 @@ module.exports = {
                 }
             }
         }, {
+            test: /\.css$/,
+            use: [{
+                loader: 'style-loader'
+            }, {
+                loader: 'css-loader',
+                options: {
+                    modules: true,
+                    camelCase: true,
+                    importLoaders: 1,
+                    localIdentName: '[name]__[local]__[hash:base64:8]'
+                }
+            }
+            ]
+        }, {
             test: /\.html$/,
             use: {
                 loader: 'html-loader'
