@@ -8,8 +8,8 @@ module.exports = {
     context: path.resolve(__dirname, '..'),
     entry: {
         bundle: [
-            './client',
-            'webpack-hot-middle/client?path=/__webpack_hmr&timeout=20000'
+            './client/index.js',
+            'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000'
         ],
         vendor: [
             'react',
@@ -31,7 +31,7 @@ module.exports = {
             use: {
                 loader: 'babel-loader',
                 options: {
-                    presets: ['env'],
+                    presets: ['env', 'react'],
                     plugins: ['transform-runtime'],
                     cacheDirectory: true
                 }
@@ -51,7 +51,7 @@ module.exports = {
             filename: '[name].js'
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new HtmlWebpackPlugin({
             filename: '../views/dev/index.html',
             template: './views/tpl/index.tpl.html'
