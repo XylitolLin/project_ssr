@@ -10,6 +10,7 @@ export default () => {
         <div>
             <div>
                 <Link to="/">Home</Link>
+                <hr />
                 <Link to="/users">Users</Link>
             </div>
             <Switch>

@@ -4,6 +4,6 @@ import styles from './Home.css'
 
 export default () => (
     <div className={styles['page']}>
-        Home!
+        Home, Hello World!
     </div>
 )

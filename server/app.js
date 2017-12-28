@@ -11,7 +11,6 @@ app.keys = ['this is a srcret']
 app.use(session(app))
 app.use(compress())
 app.use(bodyParser())
-app.use(bodyParser())
 app.use(json())
 app.use(logger())
 

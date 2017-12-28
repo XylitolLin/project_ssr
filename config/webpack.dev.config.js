@@ -4,10 +4,11 @@ const path = require('path'),
     ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
 module.exports = {
-    devtool: 'eval-source-map',
+    devtool: 'eval',
     context: path.resolve(__dirname, '..'),
     entry: {
         bundle: [
+            'react-hot-loader/patch',
             './client/index.js',
             'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000'
         ],
@@ -32,7 +33,7 @@ module.exports = {
                 loader: 'babel-loader',
                 options: {
                     presets: ['env', 'react'],
-                    plugins: ['transform-runtime'],
+                    plugins: ['transform-runtime', 'react-hot-loader/babel'],
                     cacheDirectory: true
                 }
             }
@@ -57,7 +58,9 @@ module.exports = {
             }
         }]
     },
-    resolve: {extensions: [ '.js', '.json' ]},
+    resolve: {
+        extensions: [ '.js', '.json' ]
+    },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor', 'manifest'],

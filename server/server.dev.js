@@ -49,7 +49,10 @@ app.use(router.allowedMethods())
 console.log(`\n==> 🌎  Listening on port ${port}. Open up http://localhost:${port}/ in your browser.\n`)
 app.use(devMiddleware(compiler, {
     noInfo: true,
+    hot: true,
     publicPath: config.output.publicPath
 }))
-app.use(convert(hotMiddleware(compiler)))
+app.use(convert(hotMiddleware(compiler, {
+    reload: true
+})))
 app.listen(port)
