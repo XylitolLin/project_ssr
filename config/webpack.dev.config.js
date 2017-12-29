@@ -68,10 +68,10 @@ module.exports = {
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
-        new HtmlWebpackPlugin({
-            filename: '../views/dev/index.html',
-            template: './views/tpl/index.tpl.html'
-        }),
+        // new HtmlWebpackPlugin({
+        //     filename: '../views/dev/index.html',
+        //     template: './views/tpl/index.tpl.html'
+        // }),
         new ProgressBarPlugin({ summary: false })
     ]
 }

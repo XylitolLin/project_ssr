@@ -10,6 +10,8 @@ const store = configureStore()
 async function clientRoute(ctx, next) {
     let _renderProps, context = {}
     if (ctx.url === '/users' || ctx.url === '/') {
+        const assetsByChunkName = ctx.state.webpackStats.toJson().assetsByChunkName
+        console.log(assetsByChunkName)
         await ctx.render('index', {
             root: renderToString(
                 <Provider store={store}>
@@ -18,7 +20,8 @@ async function clientRoute(ctx, next) {
                     </StaticRouter>
                 </Provider>
             ),
-            state: store.getState()
+            state: store.getState(),
+            assets: assetsByChunkName
         })
     } else {
         await next()

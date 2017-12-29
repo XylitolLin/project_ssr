@@ -1,33 +1,24 @@
-require('babel-polyfill')
+import app from './app'
+import path from 'path'
+import webpack from 'webpack'
+import convert from 'koa-convert'
+import devMiddleware from 'koa-webpack-dev-middleware'
+import hotMiddleware from 'koa-webpack-hot-middleware'
+import views from 'koa-views'
+import config from '../config/webpack.dev.config'
+import fs from 'fs'
+import clientRoute from './middleware/clientRoute'
+// import router from './routes/index'
+import cssHook from 'css-modules-require-hook'
 
-require('babel-register')({
-    presets: [
-        ['env', { targets: { node: 'current' } }],
-        ["react"]
-    ],
-    plugins: ['add-module-exports']
-})
+const port = process.env.port || 2333,
+    compiler = webpack(config)
 
-require('css-modules-require-hook')({
+cssHook({
     extensions: ['.css'],
     camelCase: true,
     generateScopedName: '[name]__[local]__[hash:base64:8]'
 })
-
-const app = require('./app.js'),
-    path = require('path'),
-    webpack = require('webpack'),
-    convert = require('koa-convert'),
-    // koaWebpack = require('koa-webpack'),
-    devMiddleware = require('koa-webpack-dev-middleware'),
-    hotMiddleware = require('koa-webpack-hot-middleware'),
-    views = require('koa-views'),
-    config = require('../config/webpack.dev.config'),
-    fs = require('fs'),
-    clientRoute = require('./middleware/clientRoute'),
-    router = require('./routes'),
-    port = process.env.port || 2333,
-    compiler = webpack(config)
 
 compiler.plugin('emit', (compilation, callback) => {
     const assets = compilation.assets
@@ -51,8 +42,8 @@ app.use(devMiddleware(compiler, {
 }))
 app.use(views(path.resolve(__dirname, '../views/tpl'), {map: {html: 'ejs'}}))
 app.use(clientRoute)
-app.use(router.routes())
-app.use(router.allowedMethods())
+// app.use(router.routes())
+// app.use(router.allowedMethods())
 app.use(convert(hotMiddleware(compiler, {
     reload: true
 })))

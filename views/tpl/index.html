@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>React Isomorphic Boilerplate</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div id="root"><%- root %></div>
+
+        <script>window.REDUX_STATE = <%- JSON.stringify(state) %></script>
+        <% Object.keys(assets).reverse().forEach(function(item, index) { %>
+            <% var asset = assets[item] %>
+            <% if (typeof asset === 'string') { %>
+                <%- '<script src="/' + asset + '"></script>' %>
+            <% } else if(asset instanceof Array) { %>
+                <% asset.forEach(function(other) { %>
+                    <%- '<script src="/' + other + '"></script>' %>
+                <% }) %>
+            <% } %>
+        <% }) %>
+    </body>
+</html>
