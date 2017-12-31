@@ -10,7 +10,7 @@ const store = configureStore()
 async function clientRoute(ctx, next) {
     let _renderProps, context = {}
     if (ctx.url === '/users' || ctx.url === '/') {
-        const assetsByChunkName = ctx.state.webpackStats.toJson().assetsByChunkName
+        let assetsByChunkName = process.env.NODE_ENV !== 'production' ? ctx.state.webpackStats.toJson().assetsByChunkName : {}
         console.log(assetsByChunkName)
         await ctx.render('index', {
             root: renderToString(

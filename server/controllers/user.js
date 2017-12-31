@@ -1,6 +1,6 @@
 async function getUserInfo(ctx) {
     ctx.body = {
-        name: 'Chikara Chan',
+        name: 'MR.Lin',
         gender: 'male',
         age: 20
     }

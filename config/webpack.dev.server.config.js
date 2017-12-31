@@ -12,6 +12,11 @@ module.exports = {
     resolve: {
         extensions: [ '.js', '.json' ]
     },
+    context: path.resolve(__dirname, '../'),
+    node: {
+        __filename: true,
+        __dirname: true
+    },
     module: {
         rules: [
             {
