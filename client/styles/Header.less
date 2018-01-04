@@ -1,0 +1,53 @@
+@import './var.less';
+
+.header {
+    display: flex;
+    align-items: center;
+    background-color: @primary-color;
+    color: #FFF;
+    padding: 10px 0;
+}
+.logo {
+    display: block;
+    background: url('../assets/logo.png') no-repeat;
+    background-position: center;
+    width: 180px;
+    height: 74px;
+    background-size: 110px 40px;
+}
+
+.search-input {
+    display: flex;
+    height: 70px;
+    line-height: 70px;
+    flex: 1;
+    background: #FFF;
+    border-radius: 35px;
+    margin-right: 20px;
+    padding-left: 10px;
+    color: #999;
+    font-size: 14px;
+    [data-dpr="2"] & {
+        font-size: 28px;
+    }
+    [data-dpr="3"] & {
+        font-size: 42px;
+    }
+    input {
+        display: block;
+        height: 100%; width: 100%;
+        margin: 0;
+        padding: 0 20px 0 10px;
+        background: none;
+        border: none;
+        box-sizing: border-box;
+    }
+}
+
+.search-icon {
+    display: inline-block;
+    background: url('../assets/search-icon.png') no-repeat;
+    width: 60px;
+    background-position: center;
+    background-size: 36px;
+}

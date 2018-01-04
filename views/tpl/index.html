@@ -1,15 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cmn-Hant">
     <head>
         <meta charset="utf-8">
-        <title>React Isomorphic Boilerplate</title>
+        <title>8891中古車觸屏版-快速、便捷的汽車買賣交易平台</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name='apple-itunes-app' content='app-id=527141669'>
+        <meta id="seo-keywords" name="keywords" content="8891中古車,中古車,8891二手車,二手車,中古車買賣,二手車買賣,中古車價格,中古車自售,二手車訊,二手汽車,買車,賣車" />
+        <meta id="seo-description" name="description" content="8891中古車觸屏版為您提供買車、賣車、中古車實價求購等二手車服務，並提供廠牌、車行、價格等篩選條件，幫您快速找到合適車型,買車賣車就上8891中古車網。" />
+        <script>
+            !function(a,b){function c(){var b=f.getBoundingClientRect().width;b/i>540&&(b=540*i);var c=b/10;f.style.fontSize=c+"px",k.rem=a.rem=c}var d,e=a.document,f=e.documentElement,g=e.querySelector('meta[name="viewport"]'),h=e.querySelector('meta[name="flexible"]'),i=0,j=0,k=b.flexible||(b.flexible={});if(g){console.warn("将根据已有的meta标签来设置缩放比例");var l=g.getAttribute("content").match(/initial\-scale=([\d\.]+)/);l&&(j=parseFloat(l[1]),i=parseInt(1/j))}else if(h){var m=h.getAttribute("content");if(m){var n=m.match(/initial\-dpr=([\d\.]+)/),o=m.match(/maximum\-dpr=([\d\.]+)/);n&&(i=parseFloat(n[1]),j=parseFloat((1/i).toFixed(2))),o&&(i=parseFloat(o[1]),j=parseFloat((1/i).toFixed(2)))}}if(!i&&!j){var p=(a.navigator.appVersion.match(/android/gi),a.navigator.appVersion.match(/iphone/gi)),q=a.devicePixelRatio;i=p?q>=3&&(!i||i>=3)?3:q>=2&&(!i||i>=2)?2:1:1,j=1/i}if(f.setAttribute("data-dpr",i),!g)if(g=e.createElement("meta"),g.setAttribute("name","viewport"),g.setAttribute("content","initial-scale="+j+", maximum-scale="+j+", minimum-scale="+j+", user-scalable=no"),f.firstElementChild)f.firstElementChild.appendChild(g);else{var r=e.createElement("div");r.appendChild(g),e.write(r.innerHTML)}a.addEventListener("resize",function(){clearTimeout(d),d=setTimeout(c,300)},!1),a.addEventListener("pageshow",function(a){a.persisted&&(clearTimeout(d),d=setTimeout(c,300))},!1),"complete"===e.readyState?e.body.style.fontSize=12*i+"px":e.addEventListener("DOMContentLoaded",function(){e.body.style.fontSize=12*i+"px"},!1),c(),k.dpr=a.dpr=i,k.refreshRem=c,k.rem2px=function(a){var b=parseFloat(a)*this.rem;return"string"==typeof a&&a.match(/rem$/)&&(b+="px"),b},k.px2rem=function(a){var b=parseFloat(a)/this.rem;return"string"==typeof a&&a.match(/px$/)&&(b+="rem"),b}}(window,window.lib||(window.lib={}));
+        </script>
     </head>
     <body>
         <div id="root"><%- root %></div>
 
+        <script>window.PROPS_FORM_SERVER = <%- JSON.stringify(propsFormServer) %></script>
         <script>window.REDUX_STATE = <%- JSON.stringify(state) %></script>
+        <script>window.RENDERING_INFO = <%- JSON.stringify(renderingInfo) %></script>
+        
         <% Object.keys(assets).reverse().forEach(function(item, index) { %>
             <% var asset = assets[item] %>
             <% if (typeof asset === 'string') { %>

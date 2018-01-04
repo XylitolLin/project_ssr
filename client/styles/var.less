@@ -1,0 +1,11 @@
+@primary-color: #FF5000;
+
+.font-prefix(@size) {
+    font-size: @size;
+    [data-dpr="2"] & {
+        font-size: @size * 2;
+    }
+    [data-dpr="3"] & {
+        font-size: @size * 3;
+    }
+}

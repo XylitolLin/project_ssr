@@ -14,7 +14,7 @@ const renderApp = (Component) => {
         <AppContainer>
             <Provider store={store}>
                 <Router>
-                    <Component />
+                    <Component {...window.PROPS_FORM_SERVER} />
                 </Router>
             </Provider>
         </AppContainer>,

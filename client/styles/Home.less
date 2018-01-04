@@ -1,0 +1,54 @@
+@import './var.less';
+
+.ads-container {
+    a {
+        display: block;
+        height: 320px;
+    }
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+}
+.top-nav {
+    display: flex;
+    padding: 20px 0;
+    background-color: #FFF;
+}
+.nav-item {
+    display: block;
+    flex: 1;
+    text-align: center;
+    color: #000;
+    p {
+        margin: 15px 0;
+        .font-prefix(16px);
+    }
+}
+.nav-icon() {
+    display: block;
+    height: 73px; width: 73px;
+    margin: 0 auto;
+    background-size: 73px;
+}
+.nav-buy-icon {
+    background: url('../assets/buy.png') no-repeat;
+    .nav-icon;
+}
+.nav-sell-icon {
+    background: url('../assets/sell.png') no-repeat;
+    .nav-icon;
+}
+.nav-desc-icon {
+    background: url('../assets/feature.png') no-repeat;
+    .nav-icon;
+}
+.nav-new-icon {
+    background: url('../assets/newcar.png') no-repeat;
+    .nav-icon;
+}
+.section-common() {
+    background-color: #FFF;
+    padding: 20px 0;
+}

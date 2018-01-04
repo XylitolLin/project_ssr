@@ -9,8 +9,7 @@ import clientRoutes from '../../client/routes'
 const store = configureStore()
 
 async function clientRoute(ctx, next) {
-    let _renderProps, context = {}, msg
-    console.log(matchPath(ctx.path, clientRoutes))
+    let _renderProps, context = {}, nextProps = {}, callbackProps, renderingInfo = {}
     const foundRoute = clientRoutes.find((item, index) => {
         return ctx.path === item.path
     })
@@ -21,25 +20,32 @@ async function clientRoute(ctx, next) {
             req: ctx.req,
             res : ctx.res,
         }
+        Object.assign(renderingInfo, {
+            pathname: ctx.path,
+            query: ctx.query
+        })
         let assetsByChunkName = process.env.NODE_ENV !== 'production' ? ctx.state.webpackStats.toJson().assetsByChunkName : {}
         const routeGetInitialProps = foundRoute.component.getInitialProps
         if (typeof routeGetInitialProps === 'function') {
-            if (routeGetInitialProps instanceof Promise) {
-                msg = await routeGetInitialProps(ctxForOutside)
+            if (routeGetInitialProps.constructor.name === 'AsyncFunction') {
+                callbackProps = await routeGetInitialProps(ctxForOutside)
+                
             } else {
-                msg = routeGetInitialProps(ctxForOutside)
+                callbackProps = routeGetInitialProps(ctxForOutside)
             }
         }
-        console.log(msg)
+        Object.assign(nextProps, callbackProps)
         await ctx.render('index', {
             root: renderToString(
                 <Provider store={store}>
                     <StaticRouter location={ctx.url} context={context}>
-                        <App />
+                        <App { ...nextProps }/>
                     </StaticRouter>
                 </Provider>
             ),
             state: store.getState(),
+            propsFormServer: nextProps,
+            renderingInfo,
             assets: assetsByChunkName
         })
     } else {

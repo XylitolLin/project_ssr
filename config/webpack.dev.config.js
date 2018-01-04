@@ -3,8 +3,30 @@ const path = require('path'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
+const commonStyleLoader = [{
+    loader: 'style-loader'
+}, {
+    loader: 'css-loader',
+    options: {
+        modules: true,
+        camelCase: true,
+        importLoaders: 1,
+        localIdentName: '[name]__[local]__[hash:base64:8]'
+    }
+}, {
+    loader: 'postcss-loader',
+    options: {
+        plugins: (loader) => [
+            require('postcss-pxtorem')({
+                rootValue: 75,
+                propList: ['*', '!font-size']
+            })
+        ]
+    }
+}]
+
 module.exports = {
-    devtool: 'eval',
+    devtool: 'eval-source-map',
     context: path.resolve(__dirname, '..'),
     entry: {
         bundle: [
@@ -33,7 +55,7 @@ module.exports = {
                 loader: 'babel-loader',
                 options: {
                     presets: ['env', 'react'],
-                    plugins: ['transform-runtime', 'react-hot-loader/babel'],
+                    plugins: ['transform-runtime', 'react-hot-loader/babel', ["import", { libraryName: "antd-mobile", style: "css" }]],
                     cacheDirectory: true
                 }
             }
@@ -42,19 +64,40 @@ module.exports = {
             use: [{
                 loader: 'style-loader'
             }, {
-                loader: 'css-loader',
+                loader: 'css-loader'
+            }, {
+                loader: 'postcss-loader',
                 options: {
-                    modules: true,
-                    camelCase: true,
-                    importLoaders: 1,
-                    localIdentName: '[name]__[local]__[hash:base64:8]'
+                    plugins: (loader) => [
+                        require('postcss-pxtorem')({
+                            rootValue: 75,
+                            propList: ['*', '!font-size']
+                        })
+                    ]
                 }
-            }
-            ]
+            }]
+        }, {
+            test: /\.css$/,
+            exclude: /node_modules/,
+            use: commonStyleLoader
+        }, {
+            test: /\.less$/,
+            exclude: /node_modules/,
+            use: commonStyleLoader.concat([{
+                loader: 'less-loader'
+            }])
         }, {
             test: /\.html$/,
             use: {
                 loader: 'html-loader'
+            }
+        }, {
+            test: /\.(jpg|png|gif|webp)$/,
+            use: {
+                loader: 'url-loader',
+                options: {
+                    limit: 8192
+                }
             }
         }]
     },

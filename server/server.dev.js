@@ -8,9 +8,19 @@ require('babel-register')({
     plugins: ['add-module-exports']
 })
 
-require('css-modules-require-hook')({
+const hook = require('css-modules-require-hook')
+const lessParser = require('postcss-less').parse
+
+hook({
     extensions: ['.css'],
     camelCase: true,
+    generateScopedName: '[name]__[local]__[hash:base64:8]'
+})
+
+hook({
+    extensions: ['.less'],
+    camelCase: true,
+    processorOpts: {parser: lessParser},
     generateScopedName: '[name]__[local]__[hash:base64:8]'
 })
 
