@@ -3,9 +3,10 @@ import { Route, Switch, Link } from 'react-router-dom'
 import asyncComponent from './components/asyncComponent'
 import routes from './routes'
 
-// import './app.css'
+import './app.css'
 
 export default (props) => {
+    console.log(props)
     return (
         <Switch>
             {

@@ -27,14 +27,15 @@ async function clientRoute(ctx, next) {
         let assetsByChunkName = process.env.NODE_ENV !== 'production' ? ctx.state.webpackStats.toJson().assetsByChunkName : {}
         const routeGetInitialProps = foundRoute.component.getInitialProps
         if (typeof routeGetInitialProps === 'function') {
-            if (routeGetInitialProps.constructor.name === 'AsyncFunction') {
+            console.log(routeGetInitialProps.constructor.name)
+            // if (routeGetInitialProps.constructor.name === 'AsyncFunction') {
                 callbackProps = await routeGetInitialProps(ctxForOutside)
-                
-            } else {
-                callbackProps = routeGetInitialProps(ctxForOutside)
-            }
+            // } else {
+                // callbackProps = routeGetInitialProps(ctxForOutside)
+            // }
         }
         Object.assign(nextProps, callbackProps)
+        console.log(nextProps)
         await ctx.render('index', {
             root: renderToString(
                 <Provider store={store}>

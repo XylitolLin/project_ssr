@@ -36,12 +36,32 @@ clientConfig = {
                 loader: 'babel-loader',
                 options: {
                     presets: ['env', 'react'],
-                    plugins: ['transform-runtime'],
+                    plugins: ['transform-runtime', ["import", { libraryName: "antd-mobile", style: "css" }]],
                     cacheDirectory: true
                 }
             }
         }, {
             test: /\.css$/,
+            include: /node_modules/,
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [{
+                    loader: 'css-loader'
+                }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: (loader) => [
+                            require('postcss-pxtorem')({
+                                rootValue: 75,
+                                propList: ['*', '!font-size']
+                            })
+                        ]
+                    }
+                }]
+            })
+        }, {
+            test: /\.css$/,
+            exclude: /node_modules/,
             use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
                 use: [{
@@ -52,12 +72,57 @@ clientConfig = {
                         importLoaders: 1,
                         localIdentName: '[name]__[local]__[hash:base64:8]'
                     }
+                }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: (loader) => [
+                            require('postcss-pxtorem')({
+                                rootValue: 75,
+                                propList: ['*', '!font-size']
+                            })
+                        ]
+                    }
+                }]
+            })
+        }, {
+            test: /\.less$/,
+            exclude: /node_modules/,
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [{
+                    loader: 'css-loader',
+                    options: {
+                        modules: true,
+                        camelCase: true,
+                        importLoaders: 1,
+                        localIdentName: '[name]__[local]__[hash:base64:8]'
+                    }
+                }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: (loader) => [
+                            require('postcss-pxtorem')({
+                                rootValue: 75,
+                                propList: ['*', '!font-size']
+                            })
+                        ]
+                    }
+                }, {
+                    loader: 'less-loader'
                 }]
             })
         }, {
             test: /\.html$/,
             use: {
                 loader: 'html-loader'
+            }
+        }, {
+            test: /\.(jpg|png|gif|webp)$/,
+            use: {
+                loader: 'url-loader',
+                options: {
+                    limit: 8192
+                }
             }
         }]
     },
@@ -112,6 +177,7 @@ serverConfig = {
             }
         }, {
             test: /\.css$/,
+            exclude: /node_modules/,
             use: [{
                 loader: 'css-loader/locals',
                 options: {
@@ -120,7 +186,65 @@ serverConfig = {
                     importLoaders: 1,
                     localIdentName: '[name]__[local]__[hash:base64:8]'
                 }
+            }, {
+                loader: 'postcss-loader',
+                options: {
+                    plugins: (loader) => [
+                        require('postcss-pxtorem')({
+                            rootValue: 75,
+                            propList: ['*', '!font-size']
+                        })
+                    ]
+                }
             }]
+        }, {
+            test: /\.css$/,
+            include: /node_modules/,
+            use: [{
+                loader: 'css-loader/locals'
+            }, {
+                loader: 'postcss-loader',
+                options: {
+                    plugins: (loader) => [
+                        require('postcss-pxtorem')({
+                            rootValue: 75,
+                            propList: ['*', '!font-size']
+                        })
+                    ]
+                }
+            }]
+        }, {
+            test: /\.less$/,
+            exclude: /node_modules/,
+            use: [{
+                loader: 'css-loader/locals',
+                options: {
+                    modules: true,
+                    camelCase: true,
+                    importLoaders: 1,
+                    localIdentName: '[name]__[local]__[hash:base64:8]'
+                }
+            }, {
+                loader: 'postcss-loader',
+                options: {
+                    plugins: (loader) => [
+                        require('postcss-pxtorem')({
+                            rootValue: 75,
+                            propList: ['*', '!font-size']
+                        })
+                    ]
+                }
+            }, {
+                loader: 'less-loader'
+            }]
+        }, {
+            test: /\.(jpg|png|gif|webp)$/,
+            use: {
+                loader: 'url-loader',
+                options: {
+                    limit: 8192
+                }
+            }
         }]
     },
     externals: getExternals(),
@@ -132,7 +256,10 @@ serverConfig = {
             compress: { warnings: false },
             comments: false
         }),
-        new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)})
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+            'process.env.SERVER_ENV': JSON.stringify(process.env.SERVER_ENV)
+        })
     ]
 }
 

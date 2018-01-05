@@ -11,7 +11,7 @@ const store = configureStore(window.REDUX_STATE)
 
 const renderApp = (Component) => {
     hydrate(
-        <AppContainer>
+        <AppContainer warnings={false}>
             <Provider store={store}>
                 <Router>
                     <Component {...window.PROPS_FORM_SERVER} />

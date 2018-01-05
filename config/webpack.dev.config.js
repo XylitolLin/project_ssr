@@ -61,6 +61,7 @@ module.exports = {
             }
         }, {
             test: /\.css$/,
+            include: /node_modules/,
             use: [{
                 loader: 'style-loader'
             }, {
@@ -111,6 +112,9 @@ module.exports = {
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.SERVER_ENV': JSON.stringify(process.env.SERVER_ENV) || 'development'
+        }),
         // new HtmlWebpackPlugin({
         //     filename: '../views/dev/index.html',
         //     template: './views/tpl/index.tpl.html'
