@@ -40,7 +40,6 @@ function get(url, params = {}) {
 }
 
 export async function fetchIndexInfo() {
-    console.log(`${url.apiv3}/home/touchIndex`)
     return await get(`${url.apiv3}/home/touchIndex`).then(res => res.data )
 }
 

@@ -35,7 +35,7 @@ clientConfig = {
             use: {
                 loader: 'babel-loader',
                 options: {
-                    presets: ['env', 'react'],
+                    presets: ['env', 'react', 'stage-0'],
                     plugins: ['transform-runtime', ["import", { libraryName: "antd-mobile", style: "css" }]],
                     cacheDirectory: true
                 }
@@ -170,7 +170,7 @@ serverConfig = {
             use: {
                 loader: 'babel-loader',
                 options: {
-                    presets: [['env', { targets: { node: 'current', uglify: true } }], 'react'],
+                    presets: [['env', { targets: { node: 'current', uglify: true } }], 'react', 'stage-0'],
                     plugins: ['add-module-exports'],
                     cacheDirectory: true
                 }

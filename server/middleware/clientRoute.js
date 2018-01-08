@@ -6,7 +6,11 @@ import configureStore from '../../client/common/store/configureStore'
 import App from '../../client/App'
 import clientRoutes from '../../client/routes'
 
-const store = configureStore()
+import homeModel from '../../common/models/home'
+
+import * as dva from 'dva-core'
+
+// const store = configureStore()
 
 async function clientRoute(ctx, next) {
     let _renderProps, context = {}, nextProps = {}, callbackProps, renderingInfo = {}
@@ -14,16 +18,23 @@ async function clientRoute(ctx, next) {
         return ctx.path === item.path
     })
     if (foundRoute) {
+        let app = dva.create()
+        app.model({...foundRoute.model})
+        app.start()
+        const store = app._store
         const ctxForOutside = {
             pathname: ctx.path,
             query: ctx.query,
             req: ctx.req,
-            res : ctx.res,
+            res: ctx.res,
+            dispatch: store.dispatch,
+            getState: store.getState
         }
         Object.assign(renderingInfo, {
             pathname: ctx.path,
             query: ctx.query
         })
+
         let assetsByChunkName = process.env.NODE_ENV !== 'production' ? ctx.state.webpackStats.toJson().assetsByChunkName : {}
         const routeGetInitialProps = foundRoute.component.getInitialProps
         if (typeof routeGetInitialProps === 'function') {
@@ -35,12 +46,12 @@ async function clientRoute(ctx, next) {
             // }
         }
         Object.assign(nextProps, callbackProps)
-        console.log(nextProps)
+        // console.log(nextProps)
         await ctx.render('index', {
             root: renderToString(
                 <Provider store={store}>
                     <StaticRouter location={ctx.url} context={context}>
-                        <App { ...nextProps }/>
+                        <App { ...nextProps } dispatch={store.dispatch} />
                     </StaticRouter>
                 </Provider>
             ),
@@ -49,6 +60,7 @@ async function clientRoute(ctx, next) {
             renderingInfo,
             assets: assetsByChunkName
         })
+        app = null
     } else {
         await next()
     }

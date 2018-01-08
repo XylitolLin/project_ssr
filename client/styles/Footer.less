@@ -1,0 +1,48 @@
+@import './var.less';
+.footer {
+    color: #666;
+    padding-bottom: 20px;
+}
+.footer-link {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 40px 0;
+    a {
+        text-align: center;
+    }
+}
+.icon {
+    display: block;
+    width: 110px;
+    height: 110px;
+    background-size: 110px;
+    margin-bottom: 10px;
+}
+.desktop-icon {
+    background: url('../assets/pc.png') no-repeat;
+    .icon;
+    
+}
+.feedback-icon {
+    background: url('../assets/advice.png') no-repeat;
+    .icon;
+}
+.app-icon {
+    background: url('../assets/app.png') no-repeat;
+    .icon;
+}
+
+.footer-slogan {
+    .font-prefix(18px);
+    margin: 20px 0 60px;
+    text-align: center;
+}
+
+.footer-copy-right {
+    padding: 0 40px;
+    text-align: center;
+}
+
+.footer-tel {
+    text-align: center;
+}

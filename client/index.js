@@ -7,14 +7,28 @@ import { AppContainer } from 'react-hot-loader'
 
 import App from './App'
 
-const store = configureStore(window.REDUX_STATE)
+import * as dva from 'dva-core'
+
+import homeModel from '../common/models/home'
+
+const app = dva.create({
+    initialState: window.REDUX_STATE
+})
+app.model({...homeModel})
+app.start()
+
+console.log(app)
+
+delete window.REDUX_STATE
+
+// const store = configureStore(window.REDUX_STATE)
 
 const renderApp = (Component) => {
     hydrate(
         <AppContainer warnings={false}>
-            <Provider store={store}>
+            <Provider store={app._store}>
                 <Router>
-                    <Component {...window.PROPS_FORM_SERVER} />
+                    <Component {...window.PROPS_FORM_SERVER} dispatch={app._store.dispatch } />
                 </Router>
             </Provider>
         </AppContainer>,

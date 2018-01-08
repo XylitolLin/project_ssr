@@ -54,7 +54,7 @@ module.exports = {
             use: {
                 loader: 'babel-loader',
                 options: {
-                    presets: ['env', 'react'],
+                    presets: ['env', 'react', 'stage-0'],
                     plugins: ['transform-runtime', 'react-hot-loader/babel', ["import", { libraryName: "antd-mobile", style: "css" }]],
                     cacheDirectory: true
                 }

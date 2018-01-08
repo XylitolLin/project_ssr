@@ -6,7 +6,7 @@ import routes from './routes'
 import './app.css'
 
 export default (props) => {
-    console.log(props)
+    // console.log(props)
     return (
         <Switch>
             {
