@@ -10,11 +10,13 @@ import App from './App'
 import * as dva from 'dva-core'
 
 import homeModel from '../common/models/home'
+import autosModel from '../common/models/autos'
 
 const app = dva.create({
     initialState: window.REDUX_STATE
 })
 app.model({...homeModel})
+app.model({...autosModel})
 app.start()
 
 console.log(app)

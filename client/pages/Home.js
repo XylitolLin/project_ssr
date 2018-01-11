@@ -16,7 +16,7 @@ import { connect } from 'react-redux'
 
 function Home({ hot_search, onsale, recentlySold, newCarField, dispatch }) {
     return (
-        <div>
+        <div className="page">
             <Header />
             <Carousel className={styles['ads-container']} autoplay>
                 <a><img src="https://tpc.googlesyndication.com/pagead/imgad?id=CICAgKDrvvPGfxABGAEyCK_h40pg_msb" /></a>

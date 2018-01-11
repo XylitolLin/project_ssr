@@ -37,26 +37,31 @@ function get(url, params = {}) {
         params,
         withCredentials: true,
     })
+    .then(res => res.data)
 }
 
 export async function fetchIndexInfo() {
-    return await get(`${url.apiv3}/home/touchIndex`).then(res => res.data )
+    return await get(`${url.apiv3}/home/touchIndex`)
 }
 
 export async function fetchRecentlySold() {
-    return await get(`${url.apiv3}/home/newItems`).then(res => res.data)
+    return await get(`${url.apiv3}/home/newItems`)
 }
 
 export async function fetchNewCarFieldData(apiId) {
-    return await get(`${url.newCarApi}/article`, { api: '2.9.5', t: apiId }).then(res => res.data)
+    return await get(`${url.newCarApi}/article`, { api: '2.9.5', t: apiId })
 }
 
 export async function fetchBrands() {
-    return await get(`${url.apiv3}/touchBrands`).then(res => res.data)
+    return await get(`${url.apiv3}/touchBrands`)
+}
+
+export async function fetchAutos() {
+    return await get(`${url.apiv3}/autos`)
 }
 
 export async function fetchModels(id) {
-    return await get(`${url.apiv3}/models`, { id }).then(res => res.data)
+    return await get(`${url.apiv3}/models`, { id })
 }
 
 export { url }

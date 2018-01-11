@@ -1,7 +1,6 @@
 import React from 'react'
 
-export default function asyncComponent({ component: Component, path }) {
-
+export default function asyncComponent({ component: Component, path }, dispatch) {
     if (typeof window === 'undefined') return Component
 
     if (window.RENDERING_INFO && window.RENDERING_INFO.pathname === path) {
@@ -22,7 +21,7 @@ export default function asyncComponent({ component: Component, path }) {
             const routeGetInitialProps = Component.getInitialProps
             let nextProps = {}
             if (typeof routeGetInitialProps === 'function') {
-                nextProps = await routeGetInitialProps()
+                nextProps = await routeGetInitialProps({ dispatch })
             }
             this.setState({
                 component: Component,

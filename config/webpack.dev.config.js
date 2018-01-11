@@ -55,7 +55,7 @@ module.exports = {
                 loader: 'babel-loader',
                 options: {
                     presets: ['env', 'react', 'stage-0'],
-                    plugins: ['transform-runtime', 'react-hot-loader/babel', ["import", { libraryName: "antd-mobile", style: "css" }]],
+                    plugins: ['transform-runtime', 'react-hot-loader/babel', ["import", { libraryName: "antd-mobile", style: true }]],
                     cacheDirectory: true
                 }
             }
@@ -76,6 +76,27 @@ module.exports = {
                         })
                     ]
                 }
+            }]
+        }, {
+            test: /\.less$/,
+            include: /node_modules/,
+            use: [{
+                loader: 'style-loader'
+            }, {
+                loader: 'css-loader'
+            }, {
+                loader: 'postcss-loader',
+                options: {
+                    plugins: (loader) => [
+                        require('postcss-pxtorem')({
+                            rootValue: 75,
+                            propList: ['*', '!font-size']
+                        })
+                    ]
+                }
+            }, {
+                loader: 'less-loader',
+                options: {modifyVars: { '@hd': '2px' }}
             }]
         }, {
             test: /\.css$/,

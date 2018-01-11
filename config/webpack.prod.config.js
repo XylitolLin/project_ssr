@@ -138,7 +138,10 @@ clientConfig = {
             compress: { warnings: false },
             comments: false
         }),
-        new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+            'process.env.SERVER_ENV': JSON.stringify(process.env.SERVER_ENV) || 'development'
+        }),
         new HtmlWebpackPlugin({
             filename: '../../views/prod/index.html',
             template: './views/tpl/index.html',
